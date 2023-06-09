@@ -17,12 +17,19 @@ class AuthRepository {
         _googleSignIn = googleSignIn;
 
   void signInWithGoogle() async {
-    final GoogleSignInAccount? googleSignInAccount =
-        await _googleSignIn.signIn();
-    final googleAuth = await googleSignInAccount?.authentication;
-    final credential = GoogleAuthProvider.credential(
-      accessToken: googleAuth?.accessToken,
-      idToken: googleAuth?.idToken,
-    );
+    try {
+      final GoogleSignInAccount? googleSignInAccount =
+          await _googleSignIn.signIn();
+      final googleAuth = await googleSignInAccount?.authentication;
+      final credential = GoogleAuthProvider.credential(
+        accessToken: googleAuth?.accessToken,
+        idToken: googleAuth?.idToken,
+      );
+      UserCredential userCredential =
+          await _firebaseAuth.signInWithCredential(credential);
+      print(userCredential.user?.email);
+    } catch (e) {
+      print(e);
+    }
   }
 }
