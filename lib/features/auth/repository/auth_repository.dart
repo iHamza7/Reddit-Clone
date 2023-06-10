@@ -4,7 +4,9 @@ import 'package:firebase_auth/firebase_auth.dart';
 
 import 'package:cloud_firestore/cloud_firestore.dart';
 
+import '../../../core/constants/constants.dart';
 import '../../../core/providers/firebase_providers.dart';
+import '../../../models/user_models.dart';
 
 final authRepositoryProvider = Provider((ref) => AuthRepository(
       firebaseFirestore: ref.read(firestoreProvider),
@@ -36,7 +38,14 @@ class AuthRepository {
       );
       UserCredential userCredential =
           await _firebaseAuth.signInWithCredential(credential);
-      print(userCredential.user?.email);
+      UserModel userModel = UserModel(
+          name: userCredential.user!.displayName ?? "No Name",
+          profilePic: userCredential.user!.photoURL ?? Constants.avatarDefault,
+          banner: Constants.bannerDefault,
+          uid: userCredential.user!.uid,
+          isAuthenticated: true,
+          karma: 0,
+          awards: []);
     } catch (e) {
       print(e);
     }
