@@ -5,6 +5,7 @@ import 'package:firebase_auth/firebase_auth.dart';
 import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/constants/constants.dart';
+import '../../../core/constants/firebase_constants.dart';
 import '../../../core/providers/firebase_providers.dart';
 import '../../../models/user_models.dart';
 
@@ -27,7 +28,8 @@ class AuthRepository {
         _firebaseAuth = firebaseAuth,
         _googleSignIn = googleSignIn;
 
-  CollectionReference get _users => _firebaseFirestore.collection('users');
+  CollectionReference get _users =>
+      _firebaseFirestore.collection(FirebaseConstants.usersCollection);
 
   void signInWithGoogle() async {
     try {
@@ -48,6 +50,7 @@ class AuthRepository {
           isAuthenticated: true,
           karma: 0,
           awards: []);
+      await _users.doc(userCredential.user!.uid).set(userModel.toMap());
     } catch (e) {
       print(e);
     }
