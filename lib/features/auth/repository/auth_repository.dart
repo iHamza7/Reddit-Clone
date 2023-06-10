@@ -27,6 +27,8 @@ class AuthRepository {
         _firebaseAuth = firebaseAuth,
         _googleSignIn = googleSignIn;
 
+  CollectionReference get _users => _firebaseFirestore.collection('users');
+
   void signInWithGoogle() async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
