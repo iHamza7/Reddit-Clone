@@ -12,6 +12,8 @@ import '../../../core/providers/firebase_providers.dart';
 import '../../../core/type_def.dart';
 import '../../../models/user_models.dart';
 
+final userProvider = Provider((ref) => null);
+
 final authRepositoryProvider = Provider((ref) => AuthRepository(
       firebaseFirestore: ref.read(firestoreProvider),
       firebaseAuth: ref.read(authProvider),
