@@ -6,10 +6,11 @@ import '../repository/auth_repository.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
 
-final authControllerProvider = Provider((ref) => AuthController(
-      authRepository: ref.read(authRepositoryProvider),
-      ref: ref,
-    ));
+final authControllerProvider =
+    StateNotifierProvider<AuthController, bool>((ref) => AuthController(
+          authRepository: ref.watch(authRepositoryProvider),
+          ref: ref,
+        ));
 
 class AuthController extends StateNotifier<bool> {
   final AuthRepository _authRepository;
