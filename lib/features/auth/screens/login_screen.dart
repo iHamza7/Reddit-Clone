@@ -23,7 +23,7 @@ class LoginScreen extends ConsumerWidget {
           TextButton(
             onPressed: () {},
             child: const Text(
-              'Guest',
+              'Guest User',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
