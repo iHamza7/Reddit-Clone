@@ -20,7 +20,9 @@ class AuthController extends StateNotifier<bool> {
         super(false);
 
   void signInWithGoogle(BuildContext context) async {
+    state = true;
     final user = await _authRepository.signInWithGoogle();
+    state = false;
     user.fold((l) => showSnackBar(context, l.message),
         (r) => _ref.read(userProvider.notifier).update((state) => r));
   }
