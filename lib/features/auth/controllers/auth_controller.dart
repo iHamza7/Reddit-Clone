@@ -11,12 +11,13 @@ final authControllerProvider = Provider((ref) => AuthController(
       ref: ref,
     ));
 
-class AuthController {
+class AuthController extends StateNotifier<bool> {
   final AuthRepository _authRepository;
   final Ref _ref;
   AuthController({required AuthRepository authRepository, required Ref ref})
       : _authRepository = authRepository,
-        _ref = ref;
+        _ref = ref,
+        super(false);
 
   void signInWithGoogle(BuildContext context) async {
     final user = await _authRepository.signInWithGoogle();
