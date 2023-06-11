@@ -23,7 +23,7 @@ class LoginScreen extends ConsumerWidget {
           TextButton(
             onPressed: () {},
             child: const Text(
-              'Skip',
+              'Skip shit',
               style: TextStyle(
                 fontWeight: FontWeight.bold,
                 fontSize: 16,
