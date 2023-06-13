@@ -1,3 +1,4 @@
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
 import '../../../core/snackbar.dart';
@@ -5,6 +6,11 @@ import '../../../models/user_models.dart';
 import '../repository/auth_repository.dart';
 
 final userProvider = StateProvider<UserModel?>((ref) => null);
+
+final authStateChangeProvider = StreamProvider((ref) {
+  final authController = ref.watch(authControllerProvider.notifier);
+  return authController.authStateChange;
+});
 
 final authControllerProvider =
     StateNotifierProvider<AuthController, bool>((ref) => AuthController(
@@ -19,6 +25,8 @@ class AuthController extends StateNotifier<bool> {
       : _authRepository = authRepository,
         _ref = ref,
         super(false);
+
+  Stream<User?> get authStateChange => _authRepository.authStateChange;
 
   void signInWithGoogle(BuildContext context) async {
     state = true;
