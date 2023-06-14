@@ -11,7 +11,7 @@ class HomeScreen extends ConsumerWidget {
     final user = ref.watch(userProvider)!;
     return Scaffold(
       body: Center(
-        child: Text(user.uid),
+        child: Text(user.name),
       ),
     );
   }
