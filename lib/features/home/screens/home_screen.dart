@@ -17,6 +17,18 @@ class HomeScreen extends ConsumerWidget {
           onPressed: () {},
           icon: const Icon(Icons.menu),
         ),
+        actions: [
+          IconButton(
+            onPressed: () {},
+            icon: const Icon(Icons.search),
+          ),
+          IconButton(
+            onPressed: () {},
+            icon: CircleAvatar(
+              backgroundImage: NetworkImage(user.profilePic),
+            ),
+          ),
+        ],
       ),
     );
   }
