@@ -1,11 +1,11 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CommunityList extends ConsumerWidget {
-  const CommunityList({super.key});
+class CommunityListDrawer extends ConsumerWidget {
+  const CommunityListDrawer({super.key});
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
-    return Container();
+    return const Drawer();
   }
 }
