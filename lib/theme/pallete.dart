@@ -11,7 +11,7 @@ class Pallete {
 
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: blackColor,
+    scaffoldBackgroundColor: greyColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: drawerColor,
@@ -24,7 +24,7 @@ class Pallete {
     ),
     primaryColor: redColor,
     colorScheme: ColorScheme.fromSeed(
-        seedColor: blackColor,
+        seedColor: greyColor,
         background:
             drawerColor), // will be used as alternative background color
   );
