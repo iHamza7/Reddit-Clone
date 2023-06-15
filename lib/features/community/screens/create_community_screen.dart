@@ -18,6 +18,8 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
     communityNameController.dispose();
   }
 
+  void createCommunity() {}
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
