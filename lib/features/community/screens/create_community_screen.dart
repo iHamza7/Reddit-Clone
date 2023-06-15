@@ -1,6 +1,8 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../controller/community_controller.dart';
+
 class CreateCommunityScreen extends ConsumerStatefulWidget {
   const CreateCommunityScreen({super.key});
 
@@ -18,7 +20,12 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
     communityNameController.dispose();
   }
 
-  void createCommunity() {}
+  void createCommunity() {
+    ref.read(communityControllerProvider.notifier).createCommunity(
+          context,
+          communityNameController.text.trim(),
+        );
+  }
 
   @override
   Widget build(BuildContext context) {

@@ -8,15 +8,25 @@ import '../../auth/controllers/auth_controller.dart';
 import '../repository/community_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-class CommunityController {
+final communityControllerProvider =
+    StateNotifierProvider<CommunityController, bool>((ref) {
+  final communityRepository = ref.watch(communityRepositoryProvider);
+
+  return CommunityController(
+      communityRepository: communityRepository, ref: ref);
+});
+
+class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
   final Ref _ref;
   CommunityController(
       {required CommunityRepository communityRepository, required Ref ref})
       : _communityRepository = communityRepository,
-        _ref = ref;
+        _ref = ref,
+        super(false);
 
   void createCommunity(BuildContext context, String name) async {
+    state = true;
     final uid = _ref.watch(userProvider)?.uid ?? '';
     Community community = Community(
       id: name,
@@ -27,6 +37,7 @@ class CommunityController {
       mods: [uid],
     );
     final res = await _communityRepository.createCommunity(community);
+    state = false;
     res.fold((l) => showSnackBar(context, l.message), (r) {
       showSnackBar(context, 'Community Created Succesfully');
       Routemaster.of(context).pop();
