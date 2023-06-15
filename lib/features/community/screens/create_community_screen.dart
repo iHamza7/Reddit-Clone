@@ -29,6 +29,7 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
 
   @override
   Widget build(BuildContext context) {
+    final isLoading = ref.watch(communityControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: const Text('Create a community'),
@@ -58,7 +59,7 @@ class _CreateCommunityScreenState extends ConsumerState<CreateCommunityScreen> {
               height: 10,
             ),
             ElevatedButton(
-              onPressed: () {},
+              onPressed: createCommunity,
               style: ElevatedButton.styleFrom(
                   minimumSize: const Size(double.infinity, 50),
                   shape: RoundedRectangleBorder(
