@@ -60,7 +60,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               ),
               routeInformationParser: const RoutemasterParser(),
             ),
-        error: (error, StackTrace) => ErrorText(text: error.toString()),
+        error: (error, stackTrace) => ErrorText(text: error.toString()),
         loading: () => const Loader());
   }
 }
