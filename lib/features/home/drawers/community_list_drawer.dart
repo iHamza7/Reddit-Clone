@@ -2,6 +2,10 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../../../core/common/error.dart';
+import '../../../core/common/loader.dart';
+import '../../community/controller/community_controller.dart';
+
 class CommunityListDrawer extends ConsumerWidget {
   const CommunityListDrawer({super.key});
 
@@ -22,7 +26,17 @@ class CommunityListDrawer extends ConsumerWidget {
               Icons.add,
               color: Colors.white,
             ),
-          )
+          ),
+          ref.watch(userCommunitiesProvider).when(
+              data: (communities) => ListView.builder(
+                    itemCount: communities.length,
+                    itemBuilder: (BuildContext context, int index) {
+                      final community = communities[index];
+                      return const ListTile();
+                    },
+                  ),
+              error: (error, stackTrace) => ErrorText(text: error.toString()),
+              loading: () => const Loader())
         ],
       )),
     );
