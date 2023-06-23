@@ -32,7 +32,12 @@ class CommunityListDrawer extends ConsumerWidget {
                     itemCount: communities.length,
                     itemBuilder: (BuildContext context, int index) {
                       final community = communities[index];
-                      return const ListTile();
+                      return ListTile(
+                        leading: CircleAvatar(
+                          backgroundImage: NetworkImage(community.avatar),
+                        ),
+                        title: Text('r/${community.name}'),
+                      );
                     },
                   ),
               error: (error, stackTrace) => ErrorText(text: error.toString()),
