@@ -28,17 +28,20 @@ class CommunityListDrawer extends ConsumerWidget {
             ),
           ),
           ref.watch(userCommunitiesProvider).when(
-              data: (communities) => ListView.builder(
-                    itemCount: communities.length,
-                    itemBuilder: (BuildContext context, int index) {
-                      final community = communities[index];
-                      return ListTile(
-                        leading: CircleAvatar(
-                          backgroundImage: NetworkImage(community.avatar),
-                        ),
-                        title: Text('r/${community.name}'),
-                      );
-                    },
+              data: (communities) => Expanded(
+                    child: ListView.builder(
+                      itemCount: communities.length,
+                      itemBuilder: (BuildContext context, int index) {
+                        final community = communities[index];
+                        return ListTile(
+                          leading: CircleAvatar(
+                            backgroundImage: NetworkImage(community.avatar),
+                          ),
+                          title: Text('r/${community.name}'),
+                          onTap: () {},
+                        );
+                      },
+                    ),
                   ),
               error: (error, stackTrace) => ErrorText(text: error.toString()),
               loading: () => const Loader())
