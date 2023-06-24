@@ -44,7 +44,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return ref.watch(authStateChangeProvider).when(
           data: (data) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            title: 'Reddit clone g ',
+            title: 'Reddit clone ',
             // theme: ThemeData(
             theme: Pallete.darkModeAppTheme,
             routerDelegate: RoutemasterDelegate(
