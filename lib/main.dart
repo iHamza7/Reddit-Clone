@@ -42,25 +42,26 @@ class _MyAppState extends ConsumerState<MyApp> {
   @override
   Widget build(BuildContext context) {
     return ref.watch(authStateChangeProvider).when(
-        data: (data) => MaterialApp.router(
-              debugShowCheckedModeBanner: false,
-              title: 'Reddit clone ',
-              // theme: ThemeData(
-              theme: Pallete.darkModeAppTheme,
-              routerDelegate: RoutemasterDelegate(
-                routesBuilder: (context) {
-                  if (data != null) {
-                    getData(ref, data);
-                    if (userModel != null) {
-                      return loggedInRoute;
-                    }
+          data: (data) => MaterialApp.router(
+            debugShowCheckedModeBanner: false,
+            title: 'Reddit clone ',
+            // theme: ThemeData(
+            theme: Pallete.darkModeAppTheme,
+            routerDelegate: RoutemasterDelegate(
+              routesBuilder: (context) {
+                if (data != null) {
+                  getData(ref, data);
+                  if (userModel != null) {
+                    return loggedInRoute;
                   }
-                  return loggedOutRoute;
-                },
-              ),
-              routeInformationParser: const RoutemasterParser(),
+                }
+                return loggedOutRoute;
+              },
             ),
-        error: (error, stackTrace) => ErrorText(text: error.toString()),
-        loading: () => const Loader());
+            routeInformationParser: const RoutemasterParser(),
+          ),
+          error: (error, stackTrace) => ErrorText(text: error.toString()),
+          loading: () => const Loader(),
+        );
   }
 }
