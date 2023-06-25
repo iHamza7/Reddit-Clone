@@ -36,7 +36,6 @@ class _MyAppState extends ConsumerState<MyApp> {
         .getUserData(data.uid)
         .first;
     ref.read(userProvider.notifier).update((state) => userModel);
-    setState(() {});
   }
 
   @override
@@ -51,6 +50,7 @@ class _MyAppState extends ConsumerState<MyApp> {
               routesBuilder: (context) {
                 if (data != null) {
                   getData(ref, data);
+
                   return loggedInRoute;
                 }
                 return loggedOutRoute;

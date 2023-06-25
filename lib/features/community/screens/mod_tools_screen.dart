@@ -5,6 +5,24 @@ class ModToolsScreen extends StatelessWidget {
 
   @override
   Widget build(BuildContext context) {
-    return const Placeholder();
+    return Scaffold(
+      appBar: AppBar(
+        title: const Text('Mod-Tools'),
+      ),
+      body: Column(
+        children: [
+          ListTile(
+            leading: const Icon(Icons.add_moderator),
+            title: const Text('Add Moderator'),
+            onTap: () {},
+          ),
+          ListTile(
+            leading: const Icon(Icons.edit),
+            title: const Text('Edit Community'),
+            onTap: () {},
+          ),
+        ],
+      ),
+    );
   }
 }

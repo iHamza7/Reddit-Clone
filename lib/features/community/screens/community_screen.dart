@@ -5,10 +5,15 @@ import '../../../core/common/error.dart';
 import '../../../core/common/loader.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../controller/community_controller.dart';
+import 'package:routemaster/routemaster.dart';
 
 class CommunityScreen extends ConsumerWidget {
   final String name;
   const CommunityScreen({super.key, required this.name});
+
+  void navigateToModToolsScreen(BuildContext context) {
+    Routemaster.of(context).push('/mod-tools');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
@@ -59,7 +64,9 @@ class CommunityScreen extends ConsumerWidget {
                                 ),
                                 community.mods.contains(user.uid)
                                     ? OutlinedButton(
-                                        onPressed: () {},
+                                        onPressed: () {
+                                          navigateToModToolsScreen(context);
+                                        },
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
