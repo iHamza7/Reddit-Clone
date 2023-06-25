@@ -38,33 +38,44 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
               padding: const EdgeInsets.all(8.0),
               child: Column(
                 children: [
-                  Stack(
-                    children: [
-                      DottedBorder(
-                        borderType: BorderType.RRect,
-                        radius: const Radius.circular(10),
-                        dashPattern: const [10, 4],
-                        strokeCap: StrokeCap.round,
-                        color: Pallete
-                            .darkModeAppTheme.textTheme.bodyMedium!.color!,
-                        child: Container(
-                          width: double.infinity,
-                          height: 150,
-                          decoration: BoxDecoration(
-                            borderRadius: BorderRadius.circular(15),
+                  SizedBox(
+                    height: 200,
+                    child: Stack(
+                      children: [
+                        DottedBorder(
+                          borderType: BorderType.RRect,
+                          radius: const Radius.circular(10),
+                          dashPattern: const [10, 4],
+                          strokeCap: StrokeCap.round,
+                          color: Pallete
+                              .darkModeAppTheme.textTheme.bodyMedium!.color!,
+                          child: Container(
+                            width: double.infinity,
+                            height: 150,
+                            decoration: BoxDecoration(
+                              borderRadius: BorderRadius.circular(15),
+                            ),
+                            child: community.banner.isEmpty ||
+                                    community.banner == Constants.bannerDefault
+                                ? const Center(
+                                    child: Icon(
+                                      Icons.camera_alt_outlined,
+                                      size: 40,
+                                    ),
+                                  )
+                                : Image.network(community.banner),
                           ),
-                          child: community.banner.isEmpty ||
-                                  community.banner == Constants.bannerDefault
-                              ? const Center(
-                                  child: Icon(
-                                    Icons.camera_alt_outlined,
-                                    size: 40,
-                                  ),
-                                )
-                              : Image.network(community.banner),
                         ),
-                      ),
-                    ],
+                        Positioned(
+                          bottom: 20,
+                          left: 20,
+                          child: CircleAvatar(
+                            backgroundImage: NetworkImage(community.avatar),
+                            radius: 30,
+                          ),
+                        ),
+                      ],
+                    ),
                   )
                 ],
               ),
