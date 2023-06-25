@@ -100,9 +100,18 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
                         Positioned(
                           bottom: 20,
                           left: 20,
-                          child: CircleAvatar(
-                            backgroundImage: NetworkImage(community.avatar),
-                            radius: 30,
+                          child: GestureDetector(
+                            onTap: selectProfileImage,
+                            child: profileFile != null
+                                ? CircleAvatar(
+                                    backgroundImage: FileImage(profileFile!),
+                                    radius: 30,
+                                  )
+                                : CircleAvatar(
+                                    backgroundImage:
+                                        NetworkImage(community.avatar),
+                                    radius: 30,
+                                  ),
                           ),
                         ),
                       ],
