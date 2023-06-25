@@ -1,7 +1,8 @@
 import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:flutter/material.dart';
-import '../../../core/snackbar.dart';
+
+import '../../../core/utlis.dart';
 import '../../../models/user_models.dart';
 import '../repository/auth_repository.dart';
 
