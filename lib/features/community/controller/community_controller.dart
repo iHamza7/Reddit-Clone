@@ -64,4 +64,6 @@ class CommunityController extends StateNotifier<bool> {
   Stream<Community> getCommunityByName(String name) {
     return _communityRepository.getCommunityByName(name);
   }
+
+  void editCommunity({required Community community}) async {}
 }
