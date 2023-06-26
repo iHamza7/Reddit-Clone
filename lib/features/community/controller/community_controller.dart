@@ -1,3 +1,5 @@
+import 'dart:io';
+
 import 'package:flutter/material.dart';
 import 'package:routemaster/routemaster.dart';
 
@@ -65,5 +67,10 @@ class CommunityController extends StateNotifier<bool> {
     return _communityRepository.getCommunityByName(name);
   }
 
-  void editCommunity({required Community community}) async {}
+  void editCommunity({
+    required File? profileFile,
+    required File? bannnerFile,
+    required BuildContext context,
+    required Community community,
+  }) async {}
 }
