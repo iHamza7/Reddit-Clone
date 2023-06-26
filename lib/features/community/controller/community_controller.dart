@@ -80,5 +80,13 @@ class CommunityController extends StateNotifier<bool> {
     required File? bannnerFile,
     required BuildContext context,
     required Community community,
-  }) async {}
+  }) async {
+    if (profileFile != null) {
+      _storageRepository.storeFile(
+        path: 'communities/profile',
+        id: community.name,
+        file: profileFile,
+      );
+    }
+  }
 }
