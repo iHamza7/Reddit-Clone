@@ -5,6 +5,7 @@ import 'package:routemaster/routemaster.dart';
 
 import '../../../core/constants/constants.dart';
 
+import '../../../core/providers/stroage_repository_provider.dart';
 import '../../../core/utlis.dart';
 import '../../../models/community_models.dart';
 import '../../auth/controllers/auth_controller.dart';
@@ -19,9 +20,12 @@ final userCommunitiesProvider = StreamProvider((ref) {
 final communityControllerProvider =
     StateNotifierProvider<CommunityController, bool>((ref) {
   final communityRepository = ref.watch(communityRepositoryProvider);
+  final storageRepository = ref.watch(storagaRepositoryProvider);
 
   return CommunityController(
-      communityRepository: communityRepository, ref: ref);
+      communityRepository: communityRepository,
+      ref: ref,
+      storageRepository: storageRepository);
 });
 
 final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
@@ -33,10 +37,14 @@ final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
 class CommunityController extends StateNotifier<bool> {
   final CommunityRepository _communityRepository;
   final Ref _ref;
+  final StorageRepository _storageRepository;
   CommunityController(
-      {required CommunityRepository communityRepository, required Ref ref})
+      {required CommunityRepository communityRepository,
+      required Ref ref,
+      required StorageRepository storageRepository})
       : _communityRepository = communityRepository,
         _ref = ref,
+        _storageRepository = storageRepository,
         super(false);
 
   void createCommunity(BuildContext context, String name) async {
