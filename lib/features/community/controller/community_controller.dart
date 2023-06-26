@@ -82,11 +82,13 @@ class CommunityController extends StateNotifier<bool> {
     required Community community,
   }) async {
     if (profileFile != null) {
-      _storageRepository.storeFile(
+      final res = await _storageRepository.storeFile(
         path: 'communities/profile',
         id: community.name,
         file: profileFile,
       );
+      res.fold((l) => showSnackBar(context, l.message),
+          (r) => community = community.copyWith(avatar: r));
     }
   }
 }
