@@ -103,5 +103,8 @@ class CommunityController extends StateNotifier<bool> {
         (r) => community = community.copyWith(banner: r),
       );
     }
+    final res = await _communityRepository.editCommunity(community);
+    res.fold((l) => showSnackBar(context, l.message),
+        (r) => Routemaster.of(context).pop());
   }
 }
