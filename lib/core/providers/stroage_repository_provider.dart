@@ -1,10 +1,15 @@
 import 'dart:io';
 
 import 'package:firebase_storage/firebase_storage.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 
 import '../failure.dart';
 import '../type_def.dart';
+import 'firebase_providers.dart';
+
+final storagaRepositoryProvider = Provider(
+    (ref) => StorageRepository(firebaseStorage: ref.watch(storageProvider)));
 
 class StorageRepository {
   final FirebaseStorage _firebaseStorage;
