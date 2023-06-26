@@ -77,7 +77,7 @@ class CommunityController extends StateNotifier<bool> {
 
   void editCommunity({
     required File? profileFile,
-    required File? bannnerFile,
+    required File? bannerFile,
     required BuildContext context,
     required Community community,
   }) async {
@@ -92,11 +92,11 @@ class CommunityController extends StateNotifier<bool> {
         (r) => community = community.copyWith(avatar: r),
       );
     }
-    if (bannnerFile != null) {
+    if (bannerFile != null) {
       final res = await _storageRepository.storeFile(
         path: 'communities/banner',
         id: community.name,
-        file: bannnerFile,
+        file: bannerFile,
       );
       res.fold(
         (l) => showSnackBar(context, l.message),

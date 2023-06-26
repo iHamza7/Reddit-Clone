@@ -7,6 +7,7 @@ import '../../../core/common/error.dart';
 import '../../../core/common/loader.dart';
 import '../../../core/constants/constants.dart';
 import '../../../core/utlis.dart';
+import '../../../models/community_models.dart';
 import '../../../theme/pallete.dart';
 import '../controller/community_controller.dart';
 
@@ -43,6 +44,14 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
     }
   }
 
+  void save(Community community) {
+    ref.read(communityControllerProvider.notifier).editCommunity(
+        profileFile: profileFile,
+        bannerFile: bannerFile,
+        context: context,
+        community: community);
+  }
+
   @override
   Widget build(BuildContext context) {
     return ref.watch(getCommunityByNameProvider(widget.name)).when(
@@ -51,7 +60,7 @@ class _EditCommunityScreenState extends ConsumerState<EditCommunityScreen> {
               title: const Text('Edit Community'),
               actions: [
                 TextButton(
-                  onPressed: () {},
+                  onPressed: () => save(community),
                   child: const Text(
                     'Save',
                     style: TextStyle(fontSize: 16),
