@@ -7,7 +7,7 @@ import '../../../core/common/loader.dart';
 import '../../community/controller/community_controller.dart';
 
 class SearchCommunityDelegate extends SearchDelegate {
-  final Ref ref;
+  final WidgetRef ref;
 
   SearchCommunityDelegate(this.ref);
   @override
