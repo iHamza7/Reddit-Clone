@@ -37,7 +37,7 @@ class ProfileDrawer extends ConsumerWidget {
             const Divider(),
             ListTile(
               onTap: () {},
-              title: const Text("My Profile"),
+              title: const Text("My profile"),
               leading: const Icon(
                 Icons.person,
               ),
