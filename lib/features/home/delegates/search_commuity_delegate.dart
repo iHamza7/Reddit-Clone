@@ -14,12 +14,12 @@ class SearchCommunityDelegate extends SearchDelegate {
 
   @override
   Widget? buildLeading(BuildContext context) {
-    throw UnimplementedError();
+    return null;
   }
 
   @override
   Widget buildResults(BuildContext context) {
-    throw UnimplementedError();
+    return const SizedBox();
   }
 
   @override
