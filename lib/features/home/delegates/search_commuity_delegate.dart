@@ -1,6 +1,15 @@
 import 'package:flutter/material.dart';
+import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
+
+import '../../../core/common/error.dart';
+import '../../../core/common/loader.dart';
+import '../../community/controller/community_controller.dart';
 
 class SearchCommunityDelegate extends SearchDelegate {
+  final Ref ref;
+
+  SearchCommunityDelegate(this.ref);
   @override
   List<Widget>? buildActions(BuildContext context) {
     return [
@@ -24,6 +33,25 @@ class SearchCommunityDelegate extends SearchDelegate {
 
   @override
   Widget buildSuggestions(BuildContext context) {
-    throw UnimplementedError();
+    return ref.watch(searchCommunityProvider(query)).when(
+          data: (communites) => ListView.builder(
+              itemCount: communites.length,
+              itemBuilder: (BuildContext context, int index) {
+                final community = communites[index];
+                return ListTile(
+                  leading: CircleAvatar(
+                    backgroundImage: NetworkImage(community.avatar),
+                  ),
+                  title: Text('r/${community.name}'),
+                  onTap: () => navigateToCommunity(context, community.name),
+                );
+              }),
+          error: (error, stackTrace) => ErrorText(text: error.toString()),
+          loading: () => const Loader(),
+        );
+  }
+
+  void navigateToCommunity(BuildContext context, String communityName) {
+    Routemaster.of(context).push('/r/$communityName');
   }
 }
