@@ -4,12 +4,17 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../delegates/search_commuity_delegate.dart';
 import '../drawers/community_list_drawer.dart';
+import '../drawers/profile_drawer.dart';
 
 class HomeScreen extends ConsumerWidget {
   const HomeScreen({super.key});
 
   void openDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
+  }
+
+  void openEndDrawer(BuildContext context) {
+    Scaffold.of(context).openEndDrawer();
   }
 
   @override
@@ -33,15 +38,18 @@ class HomeScreen extends ConsumerWidget {
             },
             icon: const Icon(Icons.search),
           ),
-          IconButton(
-            onPressed: () {},
-            icon: CircleAvatar(
-              backgroundImage: NetworkImage(user.profilePic),
-            ),
-          ),
+          Builder(builder: (context) {
+            return IconButton(
+              onPressed: () => openEndDrawer(context),
+              icon: CircleAvatar(
+                backgroundImage: NetworkImage(user.profilePic),
+              ),
+            );
+          }),
         ],
       ),
       drawer: const CommunityListDrawer(),
+      endDrawer: const ProfileDrawer(),
     );
   }
 }

@@ -13,9 +13,25 @@ class ProfileDrawer extends ConsumerWidget {
       child: SafeArea(
           child: Column(
         children: [
+          const SizedBox(
+            height: 5,
+          ),
           CircleAvatar(
             backgroundImage: NetworkImage(user.profilePic),
             radius: 70,
+          ),
+          const SizedBox(
+            height: 10,
+          ),
+          Text(
+            'u/${user.name}',
+            style: const TextStyle(
+              fontSize: 15,
+              fontWeight: FontWeight.w500,
+            ),
+          ),
+          const SizedBox(
+            height: 10,
           ),
         ],
       )),
