@@ -3,7 +3,13 @@ import 'package:flutter/material.dart';
 class SearchCommunityDelegate extends SearchDelegate {
   @override
   List<Widget>? buildActions(BuildContext context) {
-    throw UnimplementedError();
+    return [
+      IconButton(
+          onPressed: () {
+            query = '';
+          },
+          icon: const Icon(Icons.close))
+    ];
   }
 
   @override
