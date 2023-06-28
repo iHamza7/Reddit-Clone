@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common/error.dart';
 import '../../../core/common/loader.dart';
+import '../../../models/community_models.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../controller/community_controller.dart';
 import 'package:routemaster/routemaster.dart';
@@ -13,6 +14,12 @@ class CommunityScreen extends ConsumerWidget {
 
   void navigateToModToolsScreen(BuildContext context) {
     Routemaster.of(context).push('/mod-tools/$name');
+  }
+
+  void joinCommunity(BuildContext context, WidgetRef ref, Community community) {
+    ref
+        .read(communityControllerProvider.notifier)
+        .joinCommunity(community, context);
   }
 
   @override
@@ -79,7 +86,8 @@ class CommunityScreen extends ConsumerWidget {
                                         child: const Text('Mod-Tools'),
                                       )
                                     : OutlinedButton(
-                                        onPressed: () {},
+                                        onPressed: () => joinCommunity(
+                                            context, ref, community),
                                         style: ElevatedButton.styleFrom(
                                           shape: RoundedRectangleBorder(
                                             borderRadius:
@@ -99,7 +107,7 @@ class CommunityScreen extends ConsumerWidget {
                             Padding(
                               padding: const EdgeInsets.only(top: 10),
                               child:
-                                  Text('r/${community.members.length} members'),
+                                  Text('${community.members.length} members'),
                             ),
                           ],
                         ),
