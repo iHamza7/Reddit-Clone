@@ -70,6 +70,13 @@ class CommunityController extends StateNotifier<bool> {
     });
   }
 
+  void joinCommunity(Community community, BuildContext context) async {
+    final user = _ref.read(userProvider)!;
+    if (community.members.contains(user.uid)) {
+      _communityRepository.joinCommunity(community.name, user.uid);
+    }
+  }
+
   Stream<List<Community>> getUserCommunities() {
     final uid = _ref.read(userProvider)!.uid;
     return _communityRepository.getUserCommunities(uid);
