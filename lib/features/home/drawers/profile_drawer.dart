@@ -50,6 +50,7 @@ class ProfileDrawer extends ConsumerWidget {
                 color: Pallete.redColor,
               ),
             ),
+            Switch.adaptive(value: true, onChanged: (val) {}),
           ],
         ),
       ),
