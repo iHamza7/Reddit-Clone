@@ -80,7 +80,13 @@ class CommunityController extends StateNotifier<bool> {
     } else {
       res = await _communityRepository.leaveCommunity(community.name, user.uid);
     }
-    res.fold((l) => null, (r) => null);
+    res.fold((l) => showSnackBar(context, l.message), (r) {
+      if (community.members.contains(user.uid)) {
+        showSnackBar(context, 'Community left Successfully');
+      } else {
+        showSnackBar(context, 'Community Join Successfully');
+      }
+    });
   }
 
   Stream<List<Community>> getUserCommunities() {
