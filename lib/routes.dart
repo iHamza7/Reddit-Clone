@@ -2,6 +2,7 @@ import 'package:routemaster/routemaster.dart';
 import 'package:flutter/material.dart';
 
 import 'features/auth/screens/login_screen.dart';
+import 'features/community/screens/add_mods.dart';
 import 'features/community/screens/community_screen.dart';
 import 'features/community/screens/create_community_screen.dart';
 import 'features/community/screens/edit_community_screen.dart';
@@ -27,6 +28,10 @@ final loggedInRoute = RouteMap(routes: {
       )),
   '/edit-community/:name': (routeData) => MaterialPage(
           child: EditCommunityScreen(
+        name: routeData.pathParameters['name']!,
+      )),
+  '/add-mods/:name': (routeData) => MaterialPage(
+          child: AddModsScreen(
         name: routeData.pathParameters['name']!,
       )),
 });
