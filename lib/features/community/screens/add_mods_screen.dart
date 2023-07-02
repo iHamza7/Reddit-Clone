@@ -16,6 +16,20 @@ class AddModsScreen extends ConsumerStatefulWidget {
 
 class _AddModsScreenState extends ConsumerState<AddModsScreen> {
   Set<String> uids = {};
+  int ctr = 0;
+
+  void addUid(String uid) {
+    setState(() {
+      uids.add(uid);
+    });
+  }
+
+  void removeUid(String uid) {
+    setState(() {
+      uids.remove(uid);
+    });
+  }
+
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -34,12 +48,19 @@ class _AddModsScreenState extends ConsumerState<AddModsScreen> {
                   final member = community.members[index];
                   return ref.watch(getUserDataProvider(member)).when(
                         data: (user) {
-                          if (community.mods.contains(member)) {
+                          if (community.mods.contains(member) && ctr == 0) {
                             uids.add(member);
                           }
+                          ctr++;
                           return CheckboxListTile(
-                            value: true,
-                            onChanged: (val) {},
+                            value: uids.contains(user.uid),
+                            onChanged: (val) {
+                              if (val!) {
+                                addUid(user.uid);
+                              } else {
+                                removeUid(user.uid);
+                              }
+                            },
                             title: Text(user.name),
                           );
                         },
