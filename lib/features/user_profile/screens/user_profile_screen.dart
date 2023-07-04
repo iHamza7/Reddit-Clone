@@ -17,7 +17,7 @@ class UserProfileScreen extends ConsumerWidget {
                 headerSliverBuilder: (context, innerBoxIsScrolled) {
                   return [
                     SliverAppBar(
-                      expandedHeight: 150,
+                      expandedHeight: 200,
                       floating: true,
                       snap: true,
                       flexibleSpace: Stack(
@@ -32,12 +32,9 @@ class UserProfileScreen extends ConsumerWidget {
                             alignment: Alignment.bottomLeft,
                             padding:
                                 const EdgeInsets.all(20).copyWith(bottom: 70),
-                            child: Align(
-                              alignment: Alignment.topLeft,
-                              child: CircleAvatar(
-                                backgroundImage: NetworkImage(user.profilePic),
-                                radius: 35,
-                              ),
+                            child: CircleAvatar(
+                              backgroundImage: NetworkImage(user.profilePic),
+                              radius: 45,
                             ),
                           ),
                           Container(
