@@ -50,7 +50,7 @@ class UserProfileScreen extends ConsumerWidget {
                                   horizontal: 25,
                                 ),
                               ),
-                              child: const Text('edit p'),
+                              child: const Text('edit pr'),
                             ),
                           ),
                         ],
