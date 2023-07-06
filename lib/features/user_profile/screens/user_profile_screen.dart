@@ -11,7 +11,7 @@ class UserProfileScreen extends ConsumerWidget {
   const UserProfileScreen({super.key, required this.uid});
 
   void navigateToEditProfile(BuildContext context) {
-    Routemaster.of(context).push('edit-profile');
+    Routemaster.of(context).push('edit-profile/$uid');
   }
 
   @override
@@ -46,7 +46,7 @@ class UserProfileScreen extends ConsumerWidget {
                             alignment: Alignment.bottomLeft,
                             padding: const EdgeInsets.all(20),
                             child: OutlinedButton(
-                              onPressed: () {},
+                              onPressed: () => navigateToEditProfile(context),
                               style: ElevatedButton.styleFrom(
                                 shape: RoundedRectangleBorder(
                                   borderRadius: BorderRadius.circular(20),
