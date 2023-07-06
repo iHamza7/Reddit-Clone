@@ -10,6 +10,17 @@ import '../../../models/user_models.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../repository/user_profile_repository.dart';
 
+final userProfileControllerProvider =
+    StateNotifierProvider<UserProfileController, bool>((ref) {
+  final userProfileRepository = ref.watch(userProfileRepositoryProvider);
+  final storageRepository = ref.watch(storagaRepositoryProvider);
+
+  return UserProfileController(
+      userProfileRepository: userProfileRepository,
+      ref: ref,
+      storageRepository: storageRepository);
+});
+
 class UserProfileController extends StateNotifier<bool> {
   final UserProfileRepository _userProfileRepository;
   final Ref _ref;
@@ -27,6 +38,7 @@ class UserProfileController extends StateNotifier<bool> {
     required File? profileFile,
     required File? bannerFile,
     required BuildContext context,
+    required String name,
   }) async {
     state = true;
     UserModel user = _ref.read(userProvider)!;
@@ -52,9 +64,12 @@ class UserProfileController extends StateNotifier<bool> {
         (r) => user = user.copyWith(banner: r),
       );
     }
+    user = user.copyWith(name: name);
     final res = await _userProfileRepository.editProfile(user);
     state = false;
-    res.fold((l) => showSnackBar(context, l.message),
-        (r) => Routemaster.of(context).pop());
+    res.fold((l) => showSnackBar(context, l.message), (r) {
+      _ref.read(userProvider.notifier).update((state) => user);
+      Routemaster.of(context).pop();
+    });
   }
 }
