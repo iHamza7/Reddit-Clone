@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../../../core/common/error.dart';
 import '../../../core/common/loader.dart';
@@ -8,6 +9,10 @@ import '../../auth/controllers/auth_controller.dart';
 class UserProfileScreen extends ConsumerWidget {
   final String uid;
   const UserProfileScreen({super.key, required this.uid});
+
+  void navigateToEditProfile(BuildContext context) {
+    Routemaster.of(context).push('edit-profile');
+  }
 
   @override
   Widget build(BuildContext context, WidgetRef ref) {
