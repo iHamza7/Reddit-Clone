@@ -23,6 +23,13 @@ class EditProfileScreen extends ConsumerStatefulWidget {
 class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
   File? bannerFile;
   File? profileFile;
+  late TextEditingController nameController;
+
+  @override
+  void initState() {
+    super.initState();
+    nameController = TextEditingController(text: ref.read(userProvider)!.name);
+  }
 
   void selectBannnerImage() async {
     final res = await pickImage();
