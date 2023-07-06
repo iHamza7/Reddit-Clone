@@ -11,7 +11,7 @@ class UserProfileScreen extends ConsumerWidget {
   const UserProfileScreen({super.key, required this.uid});
 
   void navigateToEditProfile(BuildContext context) {
-    Routemaster.of(context).push('edit-profile/$uid');
+    Routemaster.of(context).push('/edit-profile/$uid');
   }
 
   @override
