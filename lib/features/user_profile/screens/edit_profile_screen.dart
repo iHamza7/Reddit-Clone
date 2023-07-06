@@ -31,6 +31,12 @@ class _EditProfileScreenState extends ConsumerState<EditProfileScreen> {
     nameController = TextEditingController(text: ref.read(userProvider)!.name);
   }
 
+  @override
+  void dispose() {
+    super.dispose();
+    nameController.dispose();
+  }
+
   void selectBannnerImage() async {
     final res = await pickImage();
 
