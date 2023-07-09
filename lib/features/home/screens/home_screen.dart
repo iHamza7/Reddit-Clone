@@ -1,6 +1,7 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
+import '../../../core/constants/constants.dart';
 import '../../../theme/pallete.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../delegates/search_commuity_delegate.dart';
@@ -62,6 +63,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           }),
         ],
       ),
+      body: Constants.tabWidgets[_page],
       drawer: const CommunityListDrawer(),
       endDrawer: const ProfileDrawer(),
       bottomNavigationBar: BottomNavigationBar(
@@ -78,6 +80,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
           ),
         ],
         onTap: onPageChanged,
+        currentIndex: _page,
       ),
     );
   }
