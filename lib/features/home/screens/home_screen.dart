@@ -77,6 +77,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
             label: '',
           ),
         ],
+        onTap: onPageChanged,
       ),
     );
   }
