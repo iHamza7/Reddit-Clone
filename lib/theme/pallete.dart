@@ -11,7 +11,7 @@ class Pallete {
 
   // Themes
   static var darkModeAppTheme = ThemeData.dark().copyWith(
-    scaffoldBackgroundColor: greyColor,
+    scaffoldBackgroundColor: blackColor,
     cardColor: greyColor,
     appBarTheme: const AppBarTheme(
       backgroundColor: drawerColor,
@@ -23,10 +23,9 @@ class Pallete {
       backgroundColor: drawerColor,
     ),
     primaryColor: redColor,
-    colorScheme: ColorScheme.fromSeed(
-        seedColor: greyColor,
-        background:
-            drawerColor), // will be used as alternative background color
+    colorScheme: ColorScheme.fromSwatch(
+        backgroundColor:
+            greyColor), // will be used as alternative background color
   );
 
   static var lightModeAppTheme = ThemeData.light().copyWith(
@@ -43,7 +42,12 @@ class Pallete {
       backgroundColor: whiteColor,
     ),
     primaryColor: redColor,
-    colorScheme:
-        ColorScheme.fromSeed(seedColor: whiteColor, background: whiteColor),
+    colorScheme: ColorScheme.fromSwatch(backgroundColor: whiteColor),
   );
 }
+
+// class ThemeNotifier extends StateNotifier {
+//   void getTheme() async {}
+
+//   void toggleTheme() async {}
+// }
