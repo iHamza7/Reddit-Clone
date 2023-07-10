@@ -11,6 +11,7 @@ class AddPostTypeScreen extends ConsumerStatefulWidget {
 }
 
 class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
+  final titleController = TextEditingController();
   @override
   Widget build(BuildContext context) {
     return Scaffold(
@@ -22,6 +23,19 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
             child: const Text('Share'),
           ),
         ],
+      ),
+      body: TextField(
+        controller: titleController,
+        decoration: InputDecoration(
+          filled: true,
+          hintText: 'Enter Title',
+          focusedBorder: OutlineInputBorder(
+            borderSide: const BorderSide(color: Colors.blue),
+            borderRadius: BorderRadius.circular(10),
+          ),
+          border: InputBorder.none,
+          contentPadding: const EdgeInsets.all(18),
+        ),
       ),
     );
   }

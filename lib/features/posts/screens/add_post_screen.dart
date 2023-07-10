@@ -8,7 +8,7 @@ class AddPostScreen extends ConsumerWidget {
   const AddPostScreen({super.key});
 
   void navigateToAddPostScreen(BuildContext context, String type) {
-    Routemaster.of(context).push('/add-post/$Type');
+    Routemaster.of(context).push('/add-post/$type');
   }
 
   @override
@@ -61,7 +61,7 @@ class AddPostScreen extends ConsumerWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => navigateToAddPostScreen(context, 'link'),
+          onTap: () => navigateToAddPostScreen(context, 'Link'),
           child: SizedBox(
             height: cardHeightWidth,
             width: cardHeightWidth,
