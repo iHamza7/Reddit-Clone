@@ -12,8 +12,18 @@ class AddPostTypeScreen extends ConsumerStatefulWidget {
 
 class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
   final titleController = TextEditingController();
+
+  @override
+  void dispose() {
+    super.dispose();
+    titleController.dispose();
+  }
+
   @override
   Widget build(BuildContext context) {
+    final isTypeImage = widget.type == 'image';
+    final isTypeText = widget.type == 'text';
+    final isTypeLink = widget.type == 'link';
     return Scaffold(
       appBar: AppBar(
         title: Text('Post ${widget.type}'),
@@ -24,17 +34,21 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
           ),
         ],
       ),
-      body: TextField(
-        controller: titleController,
-        decoration: InputDecoration(
-          filled: true,
-          hintText: 'Enter Title',
-          focusedBorder: OutlineInputBorder(
-            borderSide: const BorderSide(color: Colors.blue),
-            borderRadius: BorderRadius.circular(10),
-          ),
-          border: InputBorder.none,
-          contentPadding: const EdgeInsets.all(18),
+      body: Padding(
+        padding: const EdgeInsets.all(8.0),
+        child: Column(
+          children: [
+            TextField(
+              controller: titleController,
+              decoration: const InputDecoration(
+                filled: true,
+                hintText: 'Enter Title',
+                border: InputBorder.none,
+                contentPadding: EdgeInsets.all(18),
+              ),
+            ),
+            const SizedBox()
+          ],
         ),
       ),
     );

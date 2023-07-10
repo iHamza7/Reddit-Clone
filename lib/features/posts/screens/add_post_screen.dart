@@ -61,7 +61,7 @@ class AddPostScreen extends ConsumerWidget {
           ),
         ),
         GestureDetector(
-          onTap: () => navigateToAddPostScreen(context, 'Link'),
+          onTap: () => navigateToAddPostScreen(context, 'link'),
           child: SizedBox(
             height: cardHeightWidth,
             width: cardHeightWidth,
