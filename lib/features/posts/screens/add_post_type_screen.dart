@@ -2,7 +2,8 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 class AddPostTypeScreen extends ConsumerStatefulWidget {
-  const AddPostTypeScreen({super.key});
+  final String type;
+  const AddPostTypeScreen({super.key, required this.type});
 
   @override
   ConsumerState<ConsumerStatefulWidget> createState() =>
@@ -12,6 +13,16 @@ class AddPostTypeScreen extends ConsumerStatefulWidget {
 class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
   @override
   Widget build(BuildContext context) {
-    return Container();
+    return Scaffold(
+      appBar: AppBar(
+        title: Text('Post ${widget.type}'),
+        actions: [
+          TextButton(
+            onPressed: () {},
+            child: const Text('Share'),
+          ),
+        ],
+      ),
+    );
   }
 }
