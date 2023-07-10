@@ -27,6 +27,7 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
   final linkController = TextEditingController();
 
   List<Community> communities = [];
+  Community? selectedCommunity;
 
   @override
   void dispose() {
@@ -140,11 +141,16 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
                       return const SizedBox();
                     }
                     return DropdownButton(
+                        value: selectedCommunity ?? data[0],
                         items: data
-                            .map((e) => DropdownMenuItem(
-                                value: data[0], child: Text(e.name)))
+                            .map((e) =>
+                                DropdownMenuItem(value: e, child: Text(e.name)))
                             .toList(),
-                        onChanged: (val) {});
+                        onChanged: (val) {
+                          setState(() {
+                            selectedCommunity = val;
+                          });
+                        });
                   },
                   error: (error, stackTrace) =>
                       ErrorText(text: error.toString()),
