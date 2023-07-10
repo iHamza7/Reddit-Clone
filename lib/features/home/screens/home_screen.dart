@@ -16,7 +16,7 @@ class HomeScreen extends ConsumerStatefulWidget {
 }
 
 class _HomeScreenState extends ConsumerState<HomeScreen> {
-  int _page = 1;
+  int _page = 0;
   void openDrawer(BuildContext context) {
     Scaffold.of(context).openDrawer();
   }
