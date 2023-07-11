@@ -10,6 +10,7 @@ import '../../../../core/utlis.dart';
 import '../../../../models/community_models.dart';
 import '../../../../theme/pallete.dart';
 import '../../community/controller/community_controller.dart';
+import '../controller/post_controller.dart';
 
 class AddPostTypeScreen extends ConsumerStatefulWidget {
   final String type;
@@ -44,6 +45,34 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
       setState(() {
         bannerFile = File(res.files.first.path!);
       });
+    }
+  }
+
+  void sharePost() {
+    if (widget.type == 'image' &&
+        bannerFile != null &&
+        titleController.text.isNotEmpty) {
+      ref.read(postControllerProvider.notifier).shareImagePost(
+          context: context,
+          title: titleController.text.trim(),
+          selectedCommnunity: selectedCommunity ?? communities[0],
+          file: bannerFile);
+    } else if (widget.type == 'text' && titleController.text.isNotEmpty) {
+      ref.read(postControllerProvider.notifier).shareTextPost(
+          context: context,
+          title: titleController.text.trim(),
+          selectedCommnunity: selectedCommunity ?? communities[0],
+          description: descriptionController.text.trim());
+    } else if (widget.type == 'link' &&
+        titleController.text.isNotEmpty &&
+        linkController.text.isNotEmpty) {
+      ref.read(postControllerProvider.notifier).shareLinkPost(
+          context: context,
+          title: titleController.text.trim(),
+          selectedCommnunity: selectedCommunity ?? communities[0],
+          link: linkController.text.trim());
+    } else {
+      showSnackBar(context, 'please Enter All the Details');
     }
   }
 
