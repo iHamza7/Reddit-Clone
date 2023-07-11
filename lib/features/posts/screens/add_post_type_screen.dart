@@ -82,112 +82,115 @@ class _AddPostTypeScreenState extends ConsumerState<AddPostTypeScreen> {
     final isTypeText = widget.type == 'text';
     final isTypeLink = widget.type == 'link';
     final currentTheme = ref.watch(themeNotifierProvider);
+    final isLoading = ref.watch(postControllerProvider);
     return Scaffold(
       appBar: AppBar(
         title: Text('Post ${widget.type}'),
         actions: [
           TextButton(
-            onPressed: () {},
+            onPressed: sharePost,
             child: const Text('Share'),
           ),
         ],
       ),
-      body: Padding(
-        padding: const EdgeInsets.all(8.0),
-        child: Column(
-          children: [
-            TextField(
-              controller: titleController,
-              decoration: const InputDecoration(
-                filled: true,
-                hintText: 'Enter Title',
-                border: InputBorder.none,
-                contentPadding: EdgeInsets.all(18),
-              ),
-              maxLength: 30,
-            ),
-            const SizedBox(
-              height: 10,
-            ),
-            if (isTypeImage)
-              GestureDetector(
-                onTap: selectBannnerImage,
-                child: DottedBorder(
-                  borderType: BorderType.RRect,
-                  radius: const Radius.circular(10),
-                  dashPattern: const [10, 4],
-                  strokeCap: StrokeCap.round,
-                  color: currentTheme.textTheme.bodyMedium!.color!,
-                  child: Container(
-                    width: double.infinity,
-                    height: 150,
-                    decoration: BoxDecoration(
-                      borderRadius: BorderRadius.circular(15),
+      body: isLoading
+          ? const Loader()
+          : Padding(
+              padding: const EdgeInsets.all(8.0),
+              child: Column(
+                children: [
+                  TextField(
+                    controller: titleController,
+                    decoration: const InputDecoration(
+                      filled: true,
+                      hintText: 'Enter Title',
+                      border: InputBorder.none,
+                      contentPadding: EdgeInsets.all(18),
                     ),
-                    child: bannerFile != null
-                        ? Image.file(bannerFile!)
-                        : const Center(
-                            child: Icon(
-                              Icons.camera_alt_outlined,
-                              size: 40,
-                            ),
-                          ),
+                    maxLength: 30,
                   ),
-                ),
+                  const SizedBox(
+                    height: 10,
+                  ),
+                  if (isTypeImage)
+                    GestureDetector(
+                      onTap: selectBannnerImage,
+                      child: DottedBorder(
+                        borderType: BorderType.RRect,
+                        radius: const Radius.circular(10),
+                        dashPattern: const [10, 4],
+                        strokeCap: StrokeCap.round,
+                        color: currentTheme.textTheme.bodyMedium!.color!,
+                        child: Container(
+                          width: double.infinity,
+                          height: 150,
+                          decoration: BoxDecoration(
+                            borderRadius: BorderRadius.circular(15),
+                          ),
+                          child: bannerFile != null
+                              ? Image.file(bannerFile!)
+                              : const Center(
+                                  child: Icon(
+                                    Icons.camera_alt_outlined,
+                                    size: 40,
+                                  ),
+                                ),
+                        ),
+                      ),
+                    ),
+                  if (isTypeText)
+                    TextField(
+                      controller: descriptionController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        hintText: 'Enter Description Here',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(18),
+                      ),
+                      maxLines: 5,
+                    ),
+                  if (isTypeLink)
+                    TextField(
+                      controller: descriptionController,
+                      decoration: const InputDecoration(
+                        filled: true,
+                        hintText: 'Enter Link Here',
+                        border: InputBorder.none,
+                        contentPadding: EdgeInsets.all(18),
+                      ),
+                    ),
+                  const SizedBox(
+                    height: 20,
+                  ),
+                  const Align(
+                    alignment: Alignment.topLeft,
+                    child: Text('Select Community'),
+                  ),
+                  ref.watch(userCommunitiesProvider).when(
+                        data: (data) {
+                          communities = data;
+                          if (data.isEmpty) {
+                            return const SizedBox();
+                          }
+                          return DropdownButton(
+                              value: selectedCommunity ?? data[0],
+                              items: data
+                                  .map((e) => DropdownMenuItem(
+                                      value: e, child: Text(e.name)))
+                                  .toList(),
+                              onChanged: (val) {
+                                setState(() {
+                                  selectedCommunity = val;
+                                });
+                              });
+                        },
+                        error: (error, stackTrace) =>
+                            ErrorText(text: error.toString()),
+                        loading: () => const Loader(),
+                      )
+                ],
               ),
-            if (isTypeText)
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  filled: true,
-                  hintText: 'Enter Description Here',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.all(18),
-                ),
-                maxLines: 5,
-              ),
-            if (isTypeLink)
-              TextField(
-                controller: descriptionController,
-                decoration: const InputDecoration(
-                  filled: true,
-                  hintText: 'Enter Link Here',
-                  border: InputBorder.none,
-                  contentPadding: EdgeInsets.all(18),
-                ),
-              ),
-            const SizedBox(
-              height: 20,
             ),
-            const Align(
-              alignment: Alignment.topLeft,
-              child: Text('Select Community'),
-            ),
-            ref.watch(userCommunitiesProvider).when(
-                  data: (data) {
-                    communities = data;
-                    if (data.isEmpty) {
-                      return const SizedBox();
-                    }
-                    return DropdownButton(
-                        value: selectedCommunity ?? data[0],
-                        items: data
-                            .map((e) =>
-                                DropdownMenuItem(value: e, child: Text(e.name)))
-                            .toList(),
-                        onChanged: (val) {
-                          setState(() {
-                            selectedCommunity = val;
-                          });
-                        });
-                  },
-                  error: (error, stackTrace) =>
-                      ErrorText(text: error.toString()),
-                  loading: () => const Loader(),
-                )
-          ],
-        ),
-      ),
     );
   }
 }
