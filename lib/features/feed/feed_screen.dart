@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../core/common/error.dart';
 import '../../core/common/loader.dart';
+import '../../core/common/post_card.dart';
 import '../community/controller/community_controller.dart';
 import '../posts/controller/post_controller.dart';
 
@@ -18,10 +19,15 @@ class FeedScreen extends ConsumerWidget {
                       itemCount: data.length,
                       itemBuilder: (BuildContext context, int index) {
                         final post = data[index];
-                        return;
+                        return PostCard(
+                          post: post,
+                        );
                       });
                 },
-                error: (error, stackTrace) => ErrorText(text: error.toString()),
+                error: (error, stackTrace) {
+                  print(error);
+                  return ErrorText(text: error.toString());
+                },
                 loading: () => const Loader(),
               ),
           error: (error, stackTrace) => ErrorText(text: error.toString()),
