@@ -2,7 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:routemaster/routemaster.dart';
 
-import '../../../theme/pallete.dart';
+import '../../../../theme/pallete.dart';
 
 class AddPostScreen extends ConsumerWidget {
   const AddPostScreen({super.key});

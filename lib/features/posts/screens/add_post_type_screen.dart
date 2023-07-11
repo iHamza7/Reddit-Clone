@@ -4,11 +4,11 @@ import 'package:dotted_border/dotted_border.dart';
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 
-import '../../../core/common/error.dart';
-import '../../../core/common/loader.dart';
-import '../../../core/utlis.dart';
-import '../../../models/community_models.dart';
-import '../../../theme/pallete.dart';
+import '../../../../core/common/error.dart';
+import '../../../../core/common/loader.dart';
+import '../../../../core/utlis.dart';
+import '../../../../models/community_models.dart';
+import '../../../../theme/pallete.dart';
 import '../../community/controller/community_controller.dart';
 
 class AddPostTypeScreen extends ConsumerStatefulWidget {
