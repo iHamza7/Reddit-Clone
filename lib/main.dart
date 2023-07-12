@@ -43,7 +43,7 @@ class _MyAppState extends ConsumerState<MyApp> {
     return ref.watch(authStateChangeProvider).when(
           data: (data) => MaterialApp.router(
             debugShowCheckedModeBanner: false,
-            title: 'Red',
+            title: 'Redd',
             // theme: ThemeData(
             theme: ref.watch(themeNotifierProvider),
             routerDelegate: RoutemasterDelegate(
