@@ -37,7 +37,21 @@ class PostCard extends ConsumerWidget {
                               CircleAvatar(
                                 backgroundImage:
                                     NetworkImage(post.communityProfilePic),
-                              )
+                                radius: 16,
+                              ),
+                              Padding(
+                                padding: const EdgeInsets.only(left: 8),
+                                child: Column(
+                                  children: [
+                                    Text(
+                                      "r/${post.communityName}",
+                                      style: const TextStyle(
+                                          fontSize: 16,
+                                          fontWeight: FontWeight.bold),
+                                    )
+                                  ],
+                                ),
+                              ),
                             ],
                           )
                         ],
