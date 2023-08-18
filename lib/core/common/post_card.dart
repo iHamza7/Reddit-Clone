@@ -21,11 +21,29 @@ class PostCard extends ConsumerWidget {
             color: currentTheme.drawerTheme.backgroundColor,
           ),
           padding: const EdgeInsets.symmetric(vertical: 10),
-          child: const Row(
+          child: Row(
             children: [
               Expanded(
                 child: Column(
-                  children: [],
+                  children: [
+                    Container(
+                      padding: const EdgeInsets.symmetric(
+                              vertical: 6, horizontal: 16)
+                          .copyWith(right: 0),
+                      child: Column(
+                        children: [
+                          Row(
+                            children: [
+                              CircleAvatar(
+                                backgroundImage:
+                                    NetworkImage(post.communityProfilePic),
+                              )
+                            ],
+                          )
+                        ],
+                      ),
+                    )
+                  ],
                 ),
               )
             ],
