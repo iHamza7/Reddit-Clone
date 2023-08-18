@@ -48,6 +48,12 @@ class PostCard extends ConsumerWidget {
                                       style: const TextStyle(
                                           fontSize: 16,
                                           fontWeight: FontWeight.bold),
+                                    ),
+                                    Text(
+                                      "u/${post.username}",
+                                      style: const TextStyle(
+                                        fontSize: 12,
+                                      ),
                                     )
                                   ],
                                 ),
