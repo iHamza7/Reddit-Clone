@@ -143,6 +143,17 @@ class PostCard extends ConsumerWidget {
                                             : null,
                                       ))
                                 ],
+                              ),
+                              Row(
+                                children: [
+                                  IconButton(
+                                      onPressed: () {},
+                                      icon: const Icon(
+                                        Icons.comment,
+                                      )),
+                                  Text(
+                                      '${post.commentCount == 0 ? 'Comment' : post.commentCount}'),
+                                ],
                               )
                             ],
                           )
