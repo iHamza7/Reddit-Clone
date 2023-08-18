@@ -4,6 +4,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import '../../features/auth/controllers/auth_controller.dart';
 import '../../models/post_model.dart';
 import '../../theme/pallete.dart';
+import 'package:any_link_preview/any_link_preview.dart';
 
 class PostCard extends ConsumerWidget {
   final Post post;
@@ -33,6 +34,7 @@ class PostCard extends ConsumerWidget {
                               vertical: 6, horizontal: 16)
                           .copyWith(right: 0),
                       child: Column(
+                        crossAxisAlignment: CrossAxisAlignment.start,
                         children: [
                           Row(
                             mainAxisAlignment: MainAxisAlignment.spaceBetween,
@@ -75,11 +77,35 @@ class PostCard extends ConsumerWidget {
                                 )
                             ],
                           ),
-                          Text(
-                            post.title,
-                            style: const TextStyle(
-                                fontSize: 19, fontWeight: FontWeight.bold),
-                          )
+                          Padding(
+                            padding: const EdgeInsets.only(top: 10),
+                            child: Text(
+                              post.title,
+                              style: const TextStyle(
+                                fontSize: 19,
+                                fontWeight: FontWeight.bold,
+                              ),
+                            ),
+                          ),
+                          if (isTypeImage)
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.35,
+                              width: double.infinity,
+                              child: Image.network(
+                                post.link!,
+                                fit: BoxFit.cover,
+                              ),
+                            ),
+                          if (isTypeLink)
+                            SizedBox(
+                              height: MediaQuery.sizeOf(context).height * 0.35,
+                              width: double.infinity,
+                              child: AnyLinkPreview(
+                                link: post.link!,
+                                displayDirection:
+                                    UIDirection.uiDirectionHorizontal,
+                              ),
+                            )
                         ],
                       ),
                     ),
