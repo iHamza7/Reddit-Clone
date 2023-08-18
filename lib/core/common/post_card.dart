@@ -75,6 +75,11 @@ class PostCard extends ConsumerWidget {
                                 )
                             ],
                           ),
+                          Text(
+                            post.title,
+                            style: const TextStyle(
+                                fontSize: 19, fontWeight: FontWeight.bold),
+                          )
                         ],
                       ),
                     ),
