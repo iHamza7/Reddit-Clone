@@ -17,6 +17,14 @@ class PostCard extends ConsumerWidget {
     ref.read(postControllerProvider.notifier).deletePost(post, context);
   }
 
+  void upvotesPost(WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).upvote(post);
+  }
+
+  void downvotesDelete(WidgetRef ref) {
+    ref.read(postControllerProvider.notifier).downvote(post);
+  }
+
   @override
   Widget build(BuildContext context, WidgetRef ref) {
     final currentTheme = ref.watch(themeNotifierProvider);
@@ -104,9 +112,9 @@ class PostCard extends ConsumerWidget {
                               ),
                             ),
                           if (isTypeLink)
-                            SizedBox(
-                              height: MediaQuery.sizeOf(context).height * 0.35,
-                              width: double.infinity,
+                            Padding(
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 18),
                               child: AnyLinkPreview(
                                 link: post.link!,
                                 displayDirection:
@@ -128,7 +136,7 @@ class PostCard extends ConsumerWidget {
                               Row(
                                 children: [
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () => upvotesPost(ref),
                                       icon: Icon(
                                         Constants.up,
                                         size: 30,
@@ -139,7 +147,7 @@ class PostCard extends ConsumerWidget {
                                   Text(
                                       '${post.upvotes.length - post.downvotes.length == 0 ? 'Vote' : post.upvotes.length - post.downvotes.length}'),
                                   IconButton(
-                                      onPressed: () {},
+                                      onPressed: () => downvotesDelete(ref),
                                       icon: Icon(
                                         Constants.down,
                                         size: 30,
