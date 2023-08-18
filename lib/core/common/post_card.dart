@@ -105,6 +105,16 @@ class PostCard extends ConsumerWidget {
                                 displayDirection:
                                     UIDirection.uiDirectionHorizontal,
                               ),
+                            ),
+                          if (isTypeText)
+                            Container(
+                              alignment: Alignment.bottomLeft,
+                              padding:
+                                  const EdgeInsets.symmetric(horizontal: 15.0),
+                              child: Text(
+                                post.description!,
+                                style: const TextStyle(color: Colors.grey),
+                              ),
                             )
                         ],
                       ),
