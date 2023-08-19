@@ -132,6 +132,7 @@ class PostCard extends ConsumerWidget {
                               ),
                             ),
                           Row(
+                            mainAxisAlignment: MainAxisAlignment.spaceBetween,
                             children: [
                               Row(
                                 children: [
@@ -167,7 +168,12 @@ class PostCard extends ConsumerWidget {
                                   Text(
                                       '${post.commentCount == 0 ? 'Comment' : post.commentCount}'),
                                 ],
-                              )
+                              ),
+                              IconButton(
+                                  onPressed: () {},
+                                  icon: const Icon(
+                                    Icons.admin_panel_settings,
+                                  )),
                             ],
                           )
                         ],
