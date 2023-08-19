@@ -88,9 +88,13 @@ class PostCard extends ConsumerWidget {
                                               fontSize: 16,
                                               fontWeight: FontWeight.bold),
                                         ),
-                                        Text(
-                                          "u/${post.username}",
-                                          style: const TextStyle(fontSize: 12),
+                                        GestureDetector(
+                                          onTap: () => navigateToUser(context),
+                                          child: Text(
+                                            "u/${post.username}",
+                                            style:
+                                                const TextStyle(fontSize: 12),
+                                          ),
                                         )
                                       ],
                                     ),
