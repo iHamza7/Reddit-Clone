@@ -1,5 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
+import 'package:routemaster/routemaster.dart';
 
 import '../../features/auth/controllers/auth_controller.dart';
 import '../../features/community/controller/community_controller.dart';
@@ -26,6 +27,14 @@ class PostCard extends ConsumerWidget {
 
   void downvotesDelete(WidgetRef ref) {
     ref.read(postControllerProvider.notifier).downvote(post);
+  }
+
+  void navigateToUser(BuildContext context) {
+    Routemaster.of(context).push('/u/${post.uid}');
+  }
+
+  void navigateToCommunity(BuildContext context) {
+    Routemaster.of(context).push('/r/${post.communityName}');
   }
 
   @override
