@@ -185,7 +185,9 @@ class PostCard extends ConsumerWidget {
                                         Icons.comment,
                                       )),
                                   Text(
-                                      '${post.commentCount == 0 ? 'Comment' : post.commentCount}'),
+                                    '${post.commentCount == 0 ? 'Comment' : post.commentCount}',
+                                    style: const TextStyle(fontSize: 17),
+                                  ),
                                 ],
                               ),
                               ref
@@ -195,7 +197,8 @@ class PostCard extends ConsumerWidget {
                                     data: (data) {
                                       if (data.mods.contains(user.uid)) {
                                         return IconButton(
-                                            onPressed: () {},
+                                            onPressed: () =>
+                                                deletePost(ref, context),
                                             icon: const Icon(
                                               Icons.admin_panel_settings,
                                             ));
@@ -206,11 +209,6 @@ class PostCard extends ConsumerWidget {
                                         ErrorText(text: error.toString()),
                                     loading: () => const Loader(),
                                   ),
-                              IconButton(
-                                  onPressed: () {},
-                                  icon: const Icon(
-                                    Icons.admin_panel_settings,
-                                  )),
                             ],
                           )
                         ],
