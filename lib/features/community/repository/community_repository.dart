@@ -115,6 +115,8 @@ class CommunityRepository {
     }
   }
 
+  CollectionReference get _posts =>
+      _firestore.collection(FirebaseConstants.postsCollection);
   CollectionReference get _communities =>
       _firestore.collection(FirebaseConstants.communitiesCollection);
 }
