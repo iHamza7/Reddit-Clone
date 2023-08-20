@@ -3,6 +3,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 
 import '../../../core/common/error.dart';
 import '../../../core/common/loader.dart';
+import '../../../core/common/post_card.dart';
 import '../controller/post_controller.dart';
 
 class CommentsSceen extends ConsumerStatefulWidget {
@@ -25,9 +26,24 @@ class _CommentsSceenState extends ConsumerState<CommentsSceen> {
   @override
   Widget build(BuildContext context) {
     return Scaffold(
+      appBar: AppBar(
+        title: const Text('Comments Section'),
+      ),
       body: ref.watch(getUserByIdProvider(widget.postId)).when(
             data: (data) {
-              return null;
+              return Column(
+                children: [
+                  PostCard(post: data),
+                  TextField(
+                    controller: commentsController,
+                    decoration: const InputDecoration(
+                      hintText: 'Your Thoughts',
+                      filled: true,
+                      border: InputBorder.none,
+                    ),
+                  )
+                ],
+              );
             },
             error: (error, stackTrace) => ErrorText(text: error.toString()),
             loading: () => const Loader(),
