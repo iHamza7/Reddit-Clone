@@ -67,7 +67,6 @@ class _CommentsSceenState extends ConsumerState<CommentsSceen> {
                           );
                         },
                         error: (error, stackTrace) {
-                          print(error.toString());
                           return ErrorText(text: error.toString());
                         },
                         loading: () => const Loader(),
