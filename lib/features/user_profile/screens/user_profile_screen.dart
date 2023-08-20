@@ -106,10 +106,8 @@ class UserProfileScreen extends ConsumerWidget {
                             );
                           });
                     },
-                    error: (error, stackTrace) {
-                      print(error.toString());
-                      return ErrorText(text: error.toString());
-                    },
+                    error: (error, stackTrace) =>
+                        ErrorText(text: error.toString()),
                     loading: () => const Loader())),
             error: (error, stackTrace) => ErrorText(text: error.toString()),
             loading: () => const Loader(),

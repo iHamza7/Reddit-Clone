@@ -10,6 +10,7 @@ import '../../../core/failure.dart';
 import '../../../core/providers/stroage_repository_provider.dart';
 import '../../../core/utlis.dart';
 import '../../../models/community_models.dart';
+import '../../../models/post_model.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../repository/community_repository.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
@@ -38,6 +39,9 @@ final getCommunityByNameProvider = StreamProvider.family((ref, String name) {
   return ref
       .watch(communityControllerProvider.notifier)
       .getCommunityByName(name);
+});
+final getCommunityPostsProvider = StreamProvider.family((ref, String name) {
+  return ref.read(communityControllerProvider.notifier).getCommunityPosts(name);
 });
 
 class CommunityController extends StateNotifier<bool> {
@@ -135,6 +139,10 @@ class CommunityController extends StateNotifier<bool> {
 
   Stream<List<Community>> searchCommunity(String query) {
     return _communityRepository.searchCommunity(query);
+  }
+
+  Stream<List<Post>> getCommunityPosts(String name) {
+    return _communityRepository.getCommunityPosts(name);
   }
 
   void addMods(
