@@ -6,6 +6,7 @@ import 'package:reddit_clone/core/providers/stroage_repository_provider.dart';
 import 'package:routemaster/routemaster.dart';
 
 import '../../../core/utlis.dart';
+import '../../../models/post_model.dart';
 import '../../../models/user_models.dart';
 import '../../auth/controllers/auth_controller.dart';
 import '../repository/user_profile_repository.dart';
@@ -19,6 +20,10 @@ final userProfileControllerProvider =
       userProfileRepository: userProfileRepository,
       ref: ref,
       storageRepository: storageRepository);
+});
+
+final getUserPostsProvider = StreamProvider.family((ref, String uid) {
+  return ref.read(userProfileControllerProvider.notifier).getUserPosts(uid);
 });
 
 class UserProfileController extends StateNotifier<bool> {
@@ -71,5 +76,9 @@ class UserProfileController extends StateNotifier<bool> {
       _ref.read(userProvider.notifier).update((state) => user);
       Routemaster.of(context).pop();
     });
+  }
+
+  Stream<List<Post>> getUserPosts(String uid) {
+    return _userProfileRepository.getUserPosts(uid);
   }
 }
