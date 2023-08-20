@@ -6,6 +6,7 @@ import 'package:routemaster/routemaster.dart';
 
 import '../../../core/providers/stroage_repository_provider.dart';
 import '../../../core/utlis.dart';
+import '../../../models/comments_model.dart';
 import '../../../models/community_models.dart';
 import '../../../models/post_model.dart';
 import '../../auth/controllers/auth_controller.dart';
@@ -32,6 +33,10 @@ final userPostProvider =
 final getUserByIdProvider = StreamProvider.family((ref, String postId) {
   final postController = ref.watch(postControllerProvider.notifier);
   return postController.getPostById(postId);
+});
+final getPostCommentsProvider = StreamProvider.family((ref, String postId) {
+  final postController = ref.watch(postControllerProvider.notifier);
+  return postController.fetchPostComments(postId);
 });
 
 class PostController extends StateNotifier<bool> {
@@ -176,7 +181,30 @@ class PostController extends StateNotifier<bool> {
     _postRepository.downvote(post, uid);
   }
 
+  void addComment({
+    required BuildContext context,
+    required String text,
+    required Post post,
+  }) async {
+    final user = _ref.read(userProvider)!;
+    final commentId = const Uuid().v1();
+    Comment comment = Comment(
+      id: commentId,
+      text: text,
+      createdAt: DateTime.now(),
+      postId: post.id,
+      username: user.name,
+      profilePic: user.profilePic,
+    );
+    final res = await _postRepository.addComment(comment);
+    res.fold((l) => showSnackBar(context, l.message), (r) => null);
+  }
+
   Stream<Post> getPostById(String postId) {
     return _postRepository.getPostById(postId);
+  }
+
+  Stream<List<Comment>> fetchPostComments(String postId) {
+    return _postRepository.getCommentsOfPost(postId);
   }
 }
