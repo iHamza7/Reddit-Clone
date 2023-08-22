@@ -85,7 +85,7 @@ class UserProfileController extends StateNotifier<bool> {
 
   void updateUserKarma(UserKarma userKarma) async {
     UserModel user = _ref.read(userProvider)!;
-    user = user.copyWith(karma: userKarma.karma);
+    user = user.copyWith(karma: user.karma + userKarma.karma);
 
     final res = await _userProfileRepository.updateUserKarma(user);
     res.fold((l) => null,
