@@ -5,6 +5,7 @@ import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:reddit_clone/core/providers/stroage_repository_provider.dart';
 import 'package:routemaster/routemaster.dart';
 
+import '../../../core/enums/enums.dart';
 import '../../../core/utlis.dart';
 import '../../../models/post_model.dart';
 import '../../../models/user_models.dart';
@@ -80,5 +81,14 @@ class UserProfileController extends StateNotifier<bool> {
 
   Stream<List<Post>> getUserPosts(String uid) {
     return _userProfileRepository.getUserPosts(uid);
+  }
+
+  void updateUserKarma(UserKarma userKarma) async {
+    UserModel user = _ref.read(userProvider)!;
+    user = user.copyWith(karma: userKarma.karma);
+
+    final res = await _userProfileRepository.updateUserKarma(user);
+    res.fold((l) => null,
+        (r) => _ref.read(userProvider.notifier).update((state) => user));
   }
 }
