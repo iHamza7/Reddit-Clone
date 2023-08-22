@@ -182,7 +182,7 @@ class PostController extends StateNotifier<bool> {
         .read(userProfileControllerProvider.notifier)
         .updateUserKarma(UserKarma.deletePost);
     res.fold((l) => null,
-        (r) => showSnackBar(context, 'Post s Deleted Successfully'));
+        (r) => showSnackBar(context, 'Post  Deleted Successfully'));
   }
 
   void upvote(Post post) async {
