@@ -43,7 +43,7 @@ class _CommentsSceenState extends ConsumerState<CommentsSceen> {
     final isGuest = !user.isAuthenticated;
     return Scaffold(
       appBar: AppBar(
-        title: const Text('Comments Section'),
+        title: const Text('Comments Section  '),
       ),
       body: ref.watch(getUserByIdProvider(widget.postId)).when(
             data: (data) {
