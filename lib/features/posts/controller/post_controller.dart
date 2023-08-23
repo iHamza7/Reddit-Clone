@@ -233,6 +233,7 @@ class PostController extends StateNotifier<bool> {
         state?.awards.remove(award);
         return state;
       });
+      Routemaster.of(context).pop();
     });
   }
 
