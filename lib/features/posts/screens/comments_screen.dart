@@ -5,6 +5,7 @@ import '../../../core/common/error.dart';
 import '../../../core/common/loader.dart';
 import '../../../core/common/post_card.dart';
 import '../../../models/post_model.dart';
+import '../../auth/controllers/auth_controller.dart';
 import '../controller/post_controller.dart';
 import '../widgets/comment_card.dart';
 
@@ -38,6 +39,8 @@ class _CommentsSceenState extends ConsumerState<CommentsSceen> {
 
   @override
   Widget build(BuildContext context) {
+    final user = ref.watch(userProvider)!;
+    final isGuest = !user.isAuthenticated;
     return Scaffold(
       appBar: AppBar(
         title: const Text('Comments Section'),
@@ -47,15 +50,16 @@ class _CommentsSceenState extends ConsumerState<CommentsSceen> {
               return Column(
                 children: [
                   PostCard(post: data),
-                  TextField(
-                    onSubmitted: (value) => addComments(data),
-                    controller: commentsController,
-                    decoration: const InputDecoration(
-                      hintText: 'Your Thoughts',
-                      filled: true,
-                      border: InputBorder.none,
+                  if (!isGuest)
+                    TextField(
+                      onSubmitted: (value) => addComments(data),
+                      controller: commentsController,
+                      decoration: const InputDecoration(
+                        hintText: 'Your Thoughts',
+                        filled: true,
+                        border: InputBorder.none,
+                      ),
                     ),
-                  ),
                   ref.watch(getPostCommentsProvider(widget.postId)).when(
                         data: (data) {
                           return Expanded(

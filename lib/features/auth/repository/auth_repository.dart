@@ -36,7 +36,7 @@ class AuthRepository {
 
   Stream<User?> get authStateChange => _firebaseAuth.authStateChanges();
 
-  FutureEither<UserModel> signInWithGoogle() async {
+  FutureEither<UserModel> signInWithGoogle(bool isFromLogin) async {
     try {
       final GoogleSignInAccount? googleSignInAccount =
           await _googleSignIn.signIn();
@@ -45,8 +45,14 @@ class AuthRepository {
         accessToken: googleAuth?.accessToken,
         idToken: googleAuth?.idToken,
       );
-      UserCredential userCredential =
-          await _firebaseAuth.signInWithCredential(credential);
+      UserCredential userCredential;
+      if (isFromLogin) {
+        userCredential = await _firebaseAuth.signInWithCredential(credential);
+      } else {
+        userCredential =
+            await _firebaseAuth.currentUser!.linkWithCredential(credential);
+      }
+
       UserModel userModel;
       if (userCredential.additionalUserInfo!.isNewUser) {
         userModel = UserModel(
