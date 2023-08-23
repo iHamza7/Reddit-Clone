@@ -214,6 +214,35 @@ class PostCard extends ConsumerWidget {
                                         ErrorText(text: error.toString()),
                                     loading: () => const Loader(),
                                   ),
+                              IconButton(
+                                  onPressed: () {
+                                    showDialog(
+                                        context: context,
+                                        builder: (context) => Dialog(
+                                              child: Padding(
+                                                padding:
+                                                    const EdgeInsets.all(20),
+                                                child: GridView.builder(
+                                                    shrinkWrap: true,
+                                                    gridDelegate:
+                                                        const SliverGridDelegateWithFixedCrossAxisCount(
+                                                            crossAxisCount: 4),
+                                                    itemCount:
+                                                        user.awards.length,
+                                                    itemBuilder:
+                                                        (BuildContext context,
+                                                            int index) {
+                                                      final award =
+                                                          user.awards[index];
+                                                      return Image.asset(
+                                                          Constants
+                                                              .awards[award]!);
+                                                    }),
+                                              ),
+                                            ));
+                                  },
+                                  icon:
+                                      const Icon(Icons.card_giftcard_outlined))
                             ],
                           )
                         ],
