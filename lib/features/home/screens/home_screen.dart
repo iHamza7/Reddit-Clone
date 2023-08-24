@@ -38,7 +38,7 @@ class _HomeScreenState extends ConsumerState<HomeScreen> {
     final currentTheme = ref.watch(themeNotifierProvider);
     return Scaffold(
       appBar: AppBar(
-        title: const Text(""),
+        title: const Text("H"),
         centerTitle: false,
         leading: Builder(builder: (context) {
           return IconButton(
