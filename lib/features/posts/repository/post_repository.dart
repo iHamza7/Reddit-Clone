@@ -48,6 +48,19 @@ class PostRepository {
             .toList());
   }
 
+  Stream<List<Post>> fetchGuestPosts(List<Community> communities) {
+    return _posts
+        .where('communityName',
+            whereIn: communities.map((e) => e.name).toList())
+        .orderBy('createdAt', descending: true)
+        .snapshots()
+        .map((event) => event.docs
+            .map((e) => Post.fromMap(
+                  e.data() as Map<String, dynamic>,
+                ))
+            .toList());
+  }
+
   FutureVoid deletePost(Post post) async {
     try {
       return right(_posts.doc(post.id).delete());
