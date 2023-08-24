@@ -48,11 +48,10 @@ class PostRepository {
             .toList());
   }
 
-  Stream<List<Post>> fetchGuestPosts(List<Community> communities) {
+  Stream<List<Post>> fetchGuestPosts() {
     return _posts
-        .where('communityName',
-            whereIn: communities.map((e) => e.name).toList())
         .orderBy('createdAt', descending: true)
+        .limit(10)
         .snapshots()
         .map((event) => event.docs
             .map((e) => Post.fromMap(
