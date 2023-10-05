@@ -23,10 +23,7 @@ class DefaultFirebaseOptions {
       case TargetPlatform.android:
         return android;
       case TargetPlatform.iOS:
-        throw UnsupportedError(
-          'DefaultFirebaseOptions have not been configured for ios - '
-          'you can reconfigure this by running the FlutterFire CLI again.',
-        );
+        return ios;
       case TargetPlatform.macOS:
         throw UnsupportedError(
           'DefaultFirebaseOptions have not been configured for macos - '
@@ -64,5 +61,16 @@ class DefaultFirebaseOptions {
     messagingSenderId: '226449293708',
     projectId: 'redditclone-b0f0f',
     storageBucket: 'redditclone-b0f0f.appspot.com',
+  );
+
+  static const FirebaseOptions ios = FirebaseOptions(
+    apiKey: 'AIzaSyDRLR6OPazfqnhdrQTlxu_h-Np_3vVqgto',
+    appId: '1:226449293708:ios:28ed48da209a17458fd6a9',
+    messagingSenderId: '226449293708',
+    projectId: 'redditclone-b0f0f',
+    storageBucket: 'redditclone-b0f0f.appspot.com',
+    androidClientId: '226449293708-3e3g2fro5qdls58ea9repas4bd1i64at.apps.googleusercontent.com',
+    iosClientId: '226449293708-1qa1ia9g0aahhgviskoto3qv4s6mi5me.apps.googleusercontent.com',
+    iosBundleId: 'com.example.redditClone',
   );
 }
