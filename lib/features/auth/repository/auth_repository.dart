@@ -1,3 +1,4 @@
+import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
@@ -38,19 +39,27 @@ class AuthRepository {
 
   FutureEither<UserModel> signInWithGoogle(bool isFromLogin) async {
     try {
-      final GoogleSignInAccount? googleSignInAccount =
-          await _googleSignIn.signIn();
-      final googleAuth = await googleSignInAccount?.authentication;
-      final credential = GoogleAuthProvider.credential(
-        accessToken: googleAuth?.accessToken,
-        idToken: googleAuth?.idToken,
-      );
       UserCredential userCredential;
-      if (isFromLogin) {
-        userCredential = await _firebaseAuth.signInWithCredential(credential);
+      if (kIsWeb) {
+        GoogleAuthProvider googleProvider = GoogleAuthProvider();
+        googleProvider
+            .addScope('https://www.googleapi.com/auth/contacts.readonly');
+        userCredential = await _firebaseAuth.signInWithPopup(googleProvider);
       } else {
-        userCredential =
-            await _firebaseAuth.currentUser!.linkWithCredential(credential);
+        final GoogleSignInAccount? googleSignInAccount =
+            await _googleSignIn.signIn();
+        final googleAuth = await googleSignInAccount?.authentication;
+        final credential = GoogleAuthProvider.credential(
+          accessToken: googleAuth?.accessToken,
+          idToken: googleAuth?.idToken,
+        );
+
+        if (isFromLogin) {
+          userCredential = await _firebaseAuth.signInWithCredential(credential);
+        } else {
+          userCredential =
+              await _firebaseAuth.currentUser!.linkWithCredential(credential);
+        }
       }
 
       UserModel userModel;

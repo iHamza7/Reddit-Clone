@@ -1,6 +1,6 @@
 import 'package:flutter/material.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
-
+import '../../../responsive/responsive.dart';
 import '../../../core/common/loader.dart';
 import '../../../core/common/signin_button.dart';
 import '../../../core/constants/constants.dart';
@@ -37,7 +37,7 @@ class LoginScreen extends ConsumerWidget {
             ),
           ],
         ),
-        body: SafeArea(
+        body: SingleChildScrollView(
           child: isLoading
               ? const Loader()
               : Column(
@@ -66,7 +66,7 @@ class LoginScreen extends ConsumerWidget {
                     const SizedBox(
                       height: 20,
                     ),
-                    const SignInButton(),
+                    const Responsive(child: SignInButton()),
                   ],
                 ),
         ),
