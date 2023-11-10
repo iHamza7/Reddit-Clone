@@ -1,10 +1,9 @@
+import 'package:cloud_firestore/cloud_firestore.dart';
+import 'package:firebase_auth/firebase_auth.dart';
 import 'package:flutter/foundation.dart';
 import 'package:flutter_riverpod/flutter_riverpod.dart';
 import 'package:fpdart/fpdart.dart';
 import 'package:google_sign_in/google_sign_in.dart';
-import 'package:firebase_auth/firebase_auth.dart';
-
-import 'package:cloud_firestore/cloud_firestore.dart';
 
 import '../../../core/constants/constants.dart';
 import '../../../core/constants/firebase_constants.dart';
